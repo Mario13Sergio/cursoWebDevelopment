@@ -1,10 +1,19 @@
 import { Container } from "./style"
-import { Home } from "../pages/Home"
+import { Outlet } from "react-router-dom"
+import { Menu } from "../components/Menu"
 
 export function App() {
   return (
    <Container>
-     <Home/>
+     <header>
+      <Menu/>
+     </header>
+     <main>
+      <Outlet/>
+     </main>
+     <footer>
+      <p>Web Development Course</p>
+     </footer>
    </Container>
     
   )
