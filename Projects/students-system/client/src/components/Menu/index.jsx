@@ -1,5 +1,9 @@
 import { NavLink } from "react-router-dom"
 import { Container } from "./styled"
+import { AiFillHome } from "react-icons/ai"
+import { IoMdPersonAdd } from "react-icons/io"
+import { BsTable } from "react-icons/bs"
+import { BsInfoCircleFill } from "react-icons/bs"
 
 export function Menu() {
     return(
@@ -8,16 +12,28 @@ export function Menu() {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to="/"className={({isActive}) => isActive ? "select" : ""}>Home</NavLink>
+                    <NavLink to="/"className={({isActive}) => isActive ? "select" : ""}>
+                        <AiFillHome/>
+                        Home
+                    </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/register"className={({isActive}) => isActive ? "select" : ""} >Cadastro</NavLink>
+                        <NavLink to="/register"className={({isActive}) => isActive ? "select" : ""} >
+                            <IoMdPersonAdd/>
+                            Cadastro
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/students"className={({isActive}) => isActive ? "select" : ""}>Alunos</NavLink>
+                        <NavLink to="/students"className={({isActive}) => isActive ? "select" : ""}>
+                            <BsTable/>
+                            Alunos
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/about"className={({isActive}) => isActive ? "select" : ""}>Sobre</NavLink>
+                        <NavLink to="/about"className={({isActive}) => isActive ? "select" : ""}>
+                           <BsInfoCircleFill/>
+                            Sobre
+                        </NavLink>
                     </li>
                     
                 </ul>
