@@ -24,7 +24,7 @@ export function Header() {
                     <h1>Sistema de Estudantes</h1>
                     <h3>Curso de Desenvolvimento Web</h3>
                     </div>
-                    <Link to="/">
+                    <Link to="/" onClick={menuActive ? toggleMenuIcon : ""}>
                         <img src="./logo-rj.png" alt="logo" />
                     </Link>          
                      </div>
