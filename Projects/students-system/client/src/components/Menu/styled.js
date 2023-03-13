@@ -7,6 +7,7 @@ export const Container = styled.div `
 
     height: calc(100vh - 10.0rem);
     position: absolute;
+    z-index: 1;
 
     display: grid;
     place-content: center;
