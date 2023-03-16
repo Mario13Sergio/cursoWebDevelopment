@@ -4,9 +4,22 @@ import { useEffect, useState, } from "react";
 import Table from 'react-bootstrap/Table';
 import { BsSearch } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { FormUpdate } from "../formUpdate";
 
 export function HandleStudents() {    
     const [listStudents, setListStudents] = useState([]);
+    const [showModal, setshowModal] = useState(false);
+    const [studentData, setStudentData] = useState([]);
+
+    const modalOpen = (studentID) => {
+        setshowModal (true)
+        const student = listStudents.findIndex(student => student.id == studentID);
+        setStudentData(listStudents[student]);
+    };
+    console.log(studentData);
+    const modalClose = () => setshowModal (false)
 
     const API = "http://localhost:3000/students"
 
@@ -61,7 +74,8 @@ export function HandleStudents() {
                         <td>{stundents.phone}</td>
                         <td>{stundents.city}</td>
                         <td>
-                            <BiEdit className ="editIcon"/>
+                            <BiEdit className ="editIcon" onClick=
+                            {() => modalOpen(stundents.id)}/>
                         </td>
                     </tr>    
 
@@ -71,6 +85,19 @@ export function HandleStudents() {
             
       </tbody>
     </Table>
+                </section>
+                <section>
+                    <Modal show={showModal} onHide={modalClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Aluno</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <FormUpdate modalClose = {modalClose} 
+                            studentData={studentData}
+                            />
+                        </Modal.Body>
+                        
+                    </Modal>
                 </section>
             </article>
         </Container>
