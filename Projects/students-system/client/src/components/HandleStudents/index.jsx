@@ -12,6 +12,16 @@ export function HandleStudents() {
     const [listStudents, setListStudents] = useState([]);
     const [showModal, setshowModal] = useState(false);
     const [studentData, setStudentData] = useState([]);
+    const [searchStudent, setSearchStudent]= useState("");
+
+    const filterStudents = listStudents.filter((student) => {
+        return (
+        String(student.id).toLowerCase().includes(searchStudent.toLocaleLowerCase()) ||
+        student.name.toLowerCase().includes(searchStudent.toLocaleLowerCase()) ||
+        student.city.toLowerCase().includes(searchStudent.toLocaleLowerCase())
+    )
+    })
+    console.log(filterStudents);
 
     const modalOpen = (studentID) => {
         setshowModal (true)
@@ -21,12 +31,12 @@ export function HandleStudents() {
     console.log(studentData);
     const modalClose = () => setshowModal (false)
 
-    const API = "http://localhost:3000/students"
+    const API = "http://localhost:3000/students/"
 
     function fetchStudents() {
         axios.get(API) 
-        .then((res) => setListStudents(res.data))
-        .catch((error) => alert(error));       
+            .then((res) => setListStudents(res.data))
+            .catch((error) => alert(error.response.data));       
     }
 
     useEffect(() => {
@@ -45,6 +55,8 @@ export function HandleStudents() {
                         id = "inputSearchStudent"
                         type="text"
                         placeholder=" "
+                        value={searchStudent}
+                        onChange={(event) => setSearchStudent(event.target.value)}
                         />
                         <label htmlFor="inputSearchStudent" className="labelInputSearch">
                             Buscar aluno
@@ -66,7 +78,7 @@ export function HandleStudents() {
       </thead>
       <tbody>
         {listStudents &&
-            listStudents.map((stundents) => {
+            filterStudents.map((stundents) => {
                 return (
                     <tr key={stundents.id}>
                         <td>{stundents.id}</td>
@@ -92,11 +104,10 @@ export function HandleStudents() {
                             <Modal.Title>Aluno</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <FormUpdate modalClose = {modalClose} 
-                            studentData={studentData}
-                            />
+                            <FormUpdate modalClose = {modalClose}  
+                            studentData={studentData} fetchStudents={fetchStudents}/>
                         </Modal.Body>
-                        
+                       
                     </Modal>
                 </section>
             </article>
